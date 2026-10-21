@@ -1,0 +1,8 @@
+{% extends "base.html" %}{% block content %}<h1>Backup, restore and reports</h1>
+<div class="card"><p>Cloud storage: {% if s3 %}<span class="pill">AWS S3 enabled</span>{% else %}<span class="muted">not configured - files are kept in local folders (simulation mode)</span>{% endif %}</p>
+<form method="post" style="display:inline"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><input type="hidden" name="action" value="create"><button>Create database backup</button></form>
+<form method="post" style="display:inline"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><input type="hidden" name="action" value="report"><button>Save collection report (CSV)</button></form></div>
+<div class="card"><h3>Database backups</h3><table>{% for b in backups %}<tr><td>{{ b }}</td><td><form method="post" onsubmit="return confirm('Restore this backup? Current data will be replaced.')">
+<input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><input type="hidden" name="action" value="restore"><input type="hidden" name="name" value="{{ b }}"><button class="danger">Restore</button></form></td></tr>
+{% else %}<tr><td class="muted">No backups yet.</td></tr>{% endfor %}</table></div>
+<div class="card"><h3>Saved reports</h3>{% for r in reports %}<p>{{ r }}</p>{% else %}<p class="muted">No reports saved yet.</p>{% endfor %}</div>{% endblock %}

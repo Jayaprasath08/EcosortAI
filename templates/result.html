@@ -1,0 +1,11 @@
+{% extends "base.html" %}{% block content %}<h1>Classification result</h1>
+<div class="row2"><div class="card"><img class="preview" src="{{ url_for('uploaded', name=c.filename) }}" alt="uploaded waste image"></div>
+<div class="card"><h3>Prediction: {% if c.predicted_category %}<span class="pill">{{ c.predicted_category }}</span>{% else %}<span class="muted">not available</span>{% endif %}</h3>
+{% if c.confidence %}<p>Confidence: {{ '%.0f%%'|format(c.confidence*100) }}{% if c.top_label %} (strongest label: {{ c.top_label }}){% endif %}</p>{% endif %}
+<p class="muted">{{ c.model_note }}</p><p class="muted">This is an estimate. Check it before saving a record.</p></div></div>
+<div class="card"><h3>Confirm and save as collection record</h3>
+<form method="post" action="{{ url_for('save_classification', cid=c.id) }}"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+<div class="row2"><div><label>Category</label><select name="category">{% for k in categories %}<option value="{{ k }}" {{ 'selected' if k == (c.confirmed_category or c.predicted_category) }}>{{ k }}</option>{% endfor %}</select>
+<label>Source</label><input name="source" required maxlength="80" placeholder="e.g. Market street bin"><label>Location</label><input name="location" required maxlength="80"></div>
+<div><label>Weight (kg)</label><input name="weight_kg" type="number" step="0.01" min="0.01" required><label>Collected on</label><input name="collected_on" type="date" value="{{ today }}" max="{{ today }}" required>
+<label>Notes</label><input name="notes" maxlength="200"></div></div><p><button>Save record</button></p></form></div>{% endblock %}

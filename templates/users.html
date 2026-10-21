@@ -1,0 +1,5 @@
+{% extends "base.html" %}{% block content %}<h1>Users</h1>
+<div class="card"><h3>Add user</h3><form method="post"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+<div class="row2"><div><label>Username</label><input name="username" required maxlength="30"><label>Password (min 8 characters)</label><input name="password" type="password" required minlength="8"></div>
+<div><label>Role</label><select name="role"><option>staff</option><option>admin</option></select></div></div><p><button>Create user</button></p></form></div>
+<div class="card"><table><tr><th>ID</th><th>Username</th><th>Role</th></tr>{% for u in rows %}<tr><td>{{ u.id }}</td><td>{{ u.username }}</td><td>{{ u.role }}</td></tr>{% endfor %}</table></div>{% endblock %}

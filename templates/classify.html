@@ -1,0 +1,9 @@
+{% extends "base.html" %}{% block content %}<h1>Classify waste image</h1>
+<div class="card"><form method="post" enctype="multipart/form-data"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+<label>Photo of the waste item (PNG or JPG, max 5 MB)</label><input type="file" name="image" accept=".png,.jpg,.jpeg" required>
+<p><button>Classify</button></p></form>
+<p class="muted">The first classification can take a while because the MobileNetV2 model is loaded.</p></div>
+<div class="card"><h3>Recent classifications</h3><table><tr><th>When</th><th>By</th><th>Predicted</th><th>Confidence</th><th>Confirmed</th></tr>
+{% for c in rows %}<tr><td><a href="{{ url_for('classification', cid=c.id) }}">{{ c.created_at }}</a></td><td>{{ c.created_by }}</td>
+<td>{{ c.predicted_category or 'n/a' }}</td><td>{{ '%.0f%%'|format(c.confidence*100) if c.confidence else '-' }}</td><td>{{ c.confirmed_category or '-' }}</td></tr>
+{% else %}<tr><td colspan="5" class="muted">None yet.</td></tr>{% endfor %}</table></div>{% endblock %}

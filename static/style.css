@@ -1,0 +1,20 @@
+:root{--g:#15803d;--gd:#14532d;--bg:#f3f7f4;--card:#fff;--tx:#1f2937;--mu:#6b7280;--bd:#d9e2dc;--rd:#b91c1c}
+*{box-sizing:border-box}body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--tx)}
+nav{background:var(--gd);color:#fff;display:flex;flex-wrap:wrap;align-items:center;gap:6px;padding:10px 18px}
+nav a{color:#d1fae5;text-decoration:none;padding:6px 10px;border-radius:6px}nav a:hover{background:#166534}
+nav .brand{font-weight:700;color:#fff;margin-right:14px}nav .sp{flex:1}nav form{display:inline}
+main{max-width:1050px;margin:22px auto;padding:0 16px}h1{margin-top:0}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:16px;margin-bottom:16px}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}.stat b{font-size:1.8rem;display:block}
+.stat span{color:var(--mu)}table{width:100%;border-collapse:collapse;font-size:.92rem}
+th,td{padding:8px;border-bottom:1px solid var(--bd);text-align:left}th{background:#ecf5ef}
+label{display:block;margin:8px 0 3px;font-weight:600;font-size:.9rem}
+input,select,textarea{width:100%;padding:8px;border:1px solid var(--bd);border-radius:6px;font:inherit}
+button,.btn{background:var(--g);color:#fff;border:0;border-radius:6px;padding:8px 14px;cursor:pointer;font:inherit;text-decoration:none;display:inline-block}
+button.danger{background:var(--rd)}button.link{background:none;color:#d1fae5;padding:6px 10px}
+.flash{padding:10px 14px;border-radius:8px;margin-bottom:12px}.flash.ok{background:#dcfce7;color:#14532d}.flash.error{background:#fee2e2;color:#7f1d1d}
+.bar{background:#e5efe8;border-radius:6px;height:18px}.bar i{display:block;height:100%;background:var(--g);border-radius:6px}
+.row2{display:grid;gap:14px;grid-template-columns:1fr 1fr}@media(max-width:700px){.row2{grid-template-columns:1fr}}
+.pill{display:inline-block;padding:2px 9px;border-radius:99px;background:#dcfce7;color:#14532d;font-size:.82rem}
+.muted{color:var(--mu)}img.preview{max-width:100%;max-height:320px;border-radius:8px;border:1px solid var(--bd)}
+.login{max-width:380px;margin:70px auto}

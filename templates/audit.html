@@ -1,0 +1,2 @@
+{% extends "base.html" %}{% block content %}<h1>Audit log</h1><div class="card"><table><tr><th>Time</th><th>User</th><th>Action</th><th>Detail</th><th>IP</th></tr>
+{% for r in rows %}<tr><td>{{ r.ts }}</td><td>{{ r.username or '-' }}</td><td>{{ r.action }}</td><td>{{ r.detail }}</td><td>{{ r.ip }}</td></tr>{% endfor %}</table></div>{% endblock %}

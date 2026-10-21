@@ -1,0 +1,10 @@
+{% extends "base.html" %}{% block content %}<h1>Collection records</h1>
+<div class="card"><h3>Add record</h3><form method="post"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+<div class="row2"><div><label>Category</label><select name="category">{% for k in categories %}<option>{{ k }}</option>{% endfor %}</select>
+<label>Source</label><input name="source" required maxlength="80"><label>Location</label><input name="location" required maxlength="80"></div>
+<div><label>Weight (kg)</label><input name="weight_kg" type="number" step="0.01" min="0.01" required><label>Collected on</label><input name="collected_on" type="date" value="{{ today }}" max="{{ today }}" required>
+<label>Notes</label><input name="notes" maxlength="200"></div></div><p><button>Add</button> <a class="btn" href="{{ url_for('export_csv') }}">Download CSV</a></p></form></div>
+<div class="card"><table><tr><th>Date</th><th>Category</th><th>Source</th><th>Location</th><th>kg</th><th>By</th>{% if role == 'admin' %}<th></th>{% endif %}</tr>
+{% for r in rows %}<tr><td>{{ r.collected_on }}</td><td>{{ r.category }}</td><td>{{ r.source }}</td><td>{{ r.location }}</td><td>{{ r.weight_kg }}</td><td>{{ r.created_by }}</td>
+{% if role == 'admin' %}<td><form method="post" action="{{ url_for('delete_record', rid=r.id) }}" onsubmit="return confirm('Delete this record?')"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><button class="danger">Delete</button></form></td>{% endif %}</tr>
+{% else %}<tr><td colspan="7" class="muted">No records yet.</td></tr>{% endfor %}</table></div>{% endblock %}
